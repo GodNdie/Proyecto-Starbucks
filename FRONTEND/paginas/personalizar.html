@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personaliza tu bebida</title>
+</head>
+<body>
+
+<form id="personalizarForm">
+  <h2>Personaliza tu bebida</h2>
+
+  <label>Tipo de leche:
+    <select id="tipo-leche" required>
+      <option value="">Elige el tipo de leche *</option>
+    </select>
+  </label>
+
+  <label>Temperatura:
+    <select id="temperatura" required>
+      <option value="">Elige la temperatura del café *</option>
+    </select>
+  </label>
+
+  <label>¿Deseas crema batida?
+    <select id="crema-batida" required>
+      <option value="">¿Deseas crema batida? *</option>
+    </select>
+  </label>
+
+  <label>Adicionales:
+    <select id="adicionales" multiple>
+      <option disabled>Selecciona adicionales</option>
+    </select>
+    <small>(Puedes elegir hasta 5)</small>
+  </label>
+
+  <div class="cantidad-control">
+    <button type="button" onclick="modificarCantidad(-1)">−</button>
+    <input type="number" id="cantidad" value="1" min="1" />
+    <button type="button" onclick="modificarCantidad(1)">+</button>
+  </div>
+
+  <div class="botones">
+    <button type="submit" class="btn-principal">Agregar al carrito</button>
+  </div>
+
+</form>
+
+<script src="../js/personalizar.js"></script>
+</body>
+</html>

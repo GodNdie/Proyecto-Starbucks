@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Starbucks Perú - Menú de Pedidos</title>
+  <link rel="stylesheet" href="../css/menu.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <img src="../img/logo-header.png" alt="Fondo Starbucks" class="logo-fondo" />
+    <div class="header-content">
+      <nav class="nav-links">
+        <a href="#">Menú</a>
+        <a href="#">Rewards</a>
+        <a href="#">Tiendas</a>
+        <a href="#">Mi Perfil</a>
+        <button class="cerrar-link" onclick="cerrarSesion()">Cerrar Sesión</button>
+      </nav>
+      <div class="authArea" id="authArea">
+        <!-- JS rellena sesión -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Bienvenida personalizada -->
+  <section class="menu-bienvenida">
+    <h1 id="saludoUsuario">Hola 👋, Cargando nombre...</h1>
+    <p>Explora nuestro menú y descubre nuevas bebidas cada día.</p>
+  </section>
+
+  <!-- Filtro y buscador -->
+  <section class="menu-filtros">
+    <input type="text" id="buscadorCafe" placeholder="🔍 Buscar café por nombre..." />
+    <select id="filtroCategoria">
+      <option value="todos">🟢 Todos</option>
+      <option value="calientes">🔥 Bebidas Calientes</option>
+      <option value="frias">❄️ Bebidas Frías</option>
+      <option value="destacados">⭐ Destacados</option>
+    </select>
+  </section>
+
+  <!-- Cafés destacados -->
+  <section class="menu-destacados">
+    <h2>⭐ Cafés Recomendados</h2>
+    <div id="destacados-container" class="cafes-grid"></div>
+  </section>
+
+  <!-- Menú dinámico -->
+  <main class="main-wrapper">
+    <h2>☕ Nuestro Menú Completo</h2>
+    <div id="cafes-container" class="cafes-grid"></div>
+  </main>
+
+  <!-- Recomendación personalizada -->
+  <section class="menu-recomendacion">
+    <h2>🎯 Sugerencia del Barista</h2>
+    <p id="sugerenciaCafe">Tu recomendación personalizada aparecerá aquí.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>© 2025 Starbucks Coffee Company</p>
+      <p>Síguenos en redes: Instagram | Facebook | Twitter</p>
+    </div>
+  </footer>
+
+  <script src="../Js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f3f3f3;
+  color: #333;
+}
+
+/* Encabezado con fondo de logo */
+.header {
+  position: relative;
+  height: 220px;
+  background: url('../img/logo-header.png') no-repeat center center;
+  background-size: contain;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.overlay-logo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 98, 65, 0.85);
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 1rem 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.btn-outline {
+  color: white;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* Contenido principal */
+.main-wrapper {
+  padding: 2rem;
+  background-color: white;
+  max-width: 900px;
+  margin: -3rem auto 2rem auto;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 3;
+}
+
+.perfil-usuario h1 {
+  font-size: 2rem;
+  color: #006241;
+  margin-bottom: 0.5rem;
+}
+
+.perfil-usuario p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Secciones internas */
+.info-basica,
+.recompensas,
+.historial-pedidos,
+.bebida-favorita {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-left: 4px solid #006241;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.info-basica ul,
+.historial-pedidos ul {
+  list-style: none;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
+
+.info-basica li,
+.historial-pedidos li {
+  margin-bottom: 0.5rem;
+}
+
+.recompensas progress {
+  width: 100%;
+  height: 20px;
+  margin: 0.5rem 0;
+}
+
+.bebida-favorita button {
+  background-color: #006241;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bebida-favorita button:hover {
+  background-color: #007B57;
+}
+
+/* Footer */
+.footer-container {
+  background-color: #006241;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 0.9rem;
+}

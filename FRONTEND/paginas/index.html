@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Starbucks Perú - Perfil de Usuario</title>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+  <!-- Header con fondo de logo -->
+  <header class="header" role="banner">
+    <div class="overlay-logo"></div>
+    <div class="header-content">
+      <div class="header-left">
+        <nav class="nav-links">
+          <a href="#">Menú</a>
+          <a href="#">Rewards</a>
+          <a href="#">Tiendas</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <a href="#" id="cerrarSesion" class="btn-outline">Cerrar Sesión</a>
+      </div>
+    </div>
+  </header>
+  <!-- Contenido principal -->
+  <main class="main-wrapper" role="main">
+    <section class="perfil-usuario">
+      <h1 id="saludo">Cargando tu perfil...</h1>
+      <p id="infoUsuario">Consulta tu estado, recompensas y más.</p>
+      <!-- Información personal -->
+      <div class="info-basica">
+        <h2>👤 Información Personal</h2>
+        <ul>
+          <li><strong>ID:</strong> <span id="idUsuario">--</span></li>
+          <li><strong>Correo:</strong> <span id="correoUsuario">--</span></li>
+          <li><strong>Miembro desde:</strong> <span id="fechaRegistro">--</span></li>
+        </ul>
+      </div>
+      <!-- Recompensas -->
+      <div class="recompensas">
+        <h2>🎁 Recompensas</h2>
+        <p>Tienes <strong><span id="puntosRewards">0</span></strong> puntos acumulados.</p>
+        <progress value="0" max="100" id="progresoPuntos"></progress>
+        <p>¡Estás a <span id="puntosRestantes">100</span> puntos de tu próxima bebida gratis!</p>
+      </div>
+      <!-- Historial de pedidos -->
+      <div class="historial-pedidos">
+        <h2>📜 Historial de Pedidos</h2>
+        <ul id="listaPedidos">
+          <li>Cargando pedidos...</li>
+        </ul>
+      </div>
+      <!-- Bebida favorita -->
+      <div class="bebida-favorita">
+        <h2>☕ Tu bebida favorita</h2>
+        <p id="bebidaFavorita">Aún no tienes una bebida favorita registrada.</p>
+        <button onclick="seleccionarFavorita()">Seleccionar Favorita</button>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="footer-container" role="contentinfo">
+    <div class="footer-bottom">
+      <p>© 2025 Starbucks Coffee Company. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <script src="../js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: url('../img/img_logostarbucks.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo-header {
+  height: 80px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-center a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-outline {
+  border: 1px solid black;
+  padding: 8px 14px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-filled {
+  background-color: black;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-filled:hover {
+  background-color: #333;
+}
+
+
+/* LOGIN */
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.contenedor {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+
+.logo {
+  width: 200px;
+  margin-top: 20px; 
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #00704A;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"] {
+  display: block;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 320px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 90%;
+  max-width: 320px;
+  margin: 10px auto;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
+
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #00704A;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #005738;
+}
+
+.registro-link {
+  display: block;
+  margin-top: 15px;
+  color: #D4BFAA;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro-link:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.footer-column {
+  flex: 1 1 180px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 6px;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  color: #666;
+  font-size: 13px;
+}
+
+.social-icons img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .contenedor {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .logo-header {
+    height: 40px;
+  }
+
+  .nav-links a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.libro-reclamaciones{
+  margin-left: center;
+}
+
+.img-reclamo {
+  height: 80px;
+  margin-top: 5px;
+}
