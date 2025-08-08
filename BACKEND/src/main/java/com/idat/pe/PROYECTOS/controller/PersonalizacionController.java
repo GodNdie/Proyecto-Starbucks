@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/personalizaciones")
@@ -17,7 +19,12 @@ public class PersonalizacionController {
     private PersonalizacionService personalizacionService;
 
     @GetMapping
-    public ResponseEntity<List<Personalizacion>> listarPersonalizaciones() {
-        return ResponseEntity.ok(personalizacionService.listar());
+    public ResponseEntity<Map<String, List<Personalizacion>>> listarAgrupadoPorTipo() {
+        List<Personalizacion> todas = personalizacionService.listar();
+
+        Map<String, List<Personalizacion>> agrupado = todas.stream()
+                .collect(Collectors.groupingBy(Personalizacion::getTipo));
+
+        return ResponseEntity.ok(agrupado);
     }
 }
