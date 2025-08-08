@@ -4,51 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personaliza tu bebida</title>
+  <link rel="stylesheet" href="../css/personalizar.css" />
 </head>
 <body>
 
-<form id="personalizarForm">
-  <h2>Personaliza tu bebida</h2>
+<main class="personalizar-container">
+  <form id="personalizarForm" class="form-personalizar">
+    <h2 class="form-title">☕ Personaliza tu bebida</h2>
 
-  <label>Tipo de leche:
-    <select id="tipo-leche" required>
-      <option value="">Elige el tipo de leche *</option>
-    </select>
-  </label>
+        <!-- Tipo de leche -->
+    <div class="form-group">
+      <label for="tipo-leche">Tipo de leche</label>
+      <select id="tipo-leche" name="tipo-leche" required>
+        <option value="" disabled selected>Elige el tipo de leche *</option>
+        <option value="Leche entera">Leche entera</option>
+        <option value="Leche descremada">Leche descremada</option>
+        <option value="Leche de soya">Leche de soya</option>
+        <option value="Leche de almendra">Leche de almendra</option>
+        <option value="Leche de avena">Leche de avena</option>
+        <option value="Sin leche">Sin leche</option>
+      </select>
+    </div>
 
-  <label>Temperatura:
-    <select id="temperatura" required>
-      <option value="">Elige la temperatura del café *</option>
-    </select>
-  </label>
+    <!-- Temperatura -->
+    <div class="form-group">
+      <label for="temperatura">Temperatura</label>
+      <select id="temperatura" name="temperatura" required>
+        <option value="" disabled selected>Elige la temperatura *</option>
+        <option value="Caliente">Caliente</option>
+        <option value="Tibio">Tibio</option>
+        <option value="Iced">Iced</option>
+      </select>
+    </div>
 
-  <label>¿Deseas crema batida?
-    <select id="crema-batida" required>
-      <option value="">¿Deseas crema batida? *</option>
-    </select>
-  </label>
+        <!-- Crema batida -->
+    <div class="form-group">
+      <label for="crema-batida">¿Deseas crema batida?</label>
+      <select id="crema-batida" name="crema-batida" required>
+        <option value="" disabled selected>Selecciona una opción *</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+    </div>
 
-  <label>Adicionales:
-    <select id="adicionales" multiple>
-      <option disabled>Selecciona adicionales</option>
-    </select>
-    <small>(Puedes elegir hasta 5)</small>
-  </label>
 
-  <div class="cantidad-control">
-    <button type="button" onclick="modificarCantidad(-1)">−</button>
-    <input type="number" id="cantidad" value="1" min="1" />
-    <button type="button" onclick="modificarCantidad(1)">+</button>
-  </div>
+        <!-- Adicionales -->
+    <div class="form-group">
+      <label for="adicionales">Adicionales</label>
+      <div class="combo-container">
+        <input type="text" id="adicionales-input" placeholder="Selecciona adicionales..." readonly>
+        <div class="combo-options" id="combo-options">
+          <div data-value="canela">Canela</div>
+          <div data-value="chocolate">Chocolate</div>
+          <div data-value="vainilla">Vainilla</div>
+          <div data-value="caramelo">Caramelo</div>
+          <div data-value="nuez moscada">Nuez Moscada</div>
+        </div>
+      </div>
+      <div class="selected-tags" id="selected-tags"></div>
+      <small class="hint">(Puedes elegir hasta 5)</small>
+    </div>
 
-  <div class="botones">
-    <button type="submit" class="btn-principal">Agregar al carrito</button>
-  </div>
 
-</form>
+    <!-- Cantidad -->
+    <div class="cantidad-control">
+      <button type="button" aria-label="Disminuir cantidad" onclick="modificarCantidad(-1)">−</button>
+      <input type="number" id="cantidad" name="cantidad" value="1" min="1" />
+      <button type="button" aria-label="Aumentar cantidad" onclick="modificarCantidad(1)">+</button>
+    </div>
 
-<script src="../js/personalizar.js"></script>
-</body>
+    <!-- Botón principal -->
+    <div class="form-actions">
+      <button type="submit" class="btn-principal">🛒 Agregar al carrito</button>
+    </div>
+  </form>
+</main>
+<!--Footer-->
 <footer class="footer-container">
     <div class="footer-menu">
       <div class="footer-column">
@@ -107,4 +138,7 @@
       </div>
     </div>
   </footer>
+
+<script src="../js/personalizar.js"></script>
+</body>
 </html>

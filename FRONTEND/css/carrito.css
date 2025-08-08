@@ -1,0 +1,254 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f8f8f8;
+}
+
+.header {
+  background-color: #006241;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+}
+
+.header img.logo-header {
+  height: 40px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.main-wrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #006241;
+}
+
+.pedido-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.pedido-card h2 {
+  color: #333;
+}
+
+.acciones-carrito {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-outline {
+  padding: 10px 20px;
+  border: 2px solid #006241;
+  background: transparent;
+  color: #006241;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: #e6f4ec;
+}
+
+.btn-filled {
+  padding: 10px 20px;
+  border: none;
+  background: #006241;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-filled:hover {
+  background: #004d34;
+}
+
+.footer-container {
+  background: #f1f1f1;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 40px;
+}
+/* Modal estilos */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 450px;
+  margin: 10% auto;
+  text-align: center;
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.pedido-resumen {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.pedido-resumen ul {
+  padding: 0;
+  list-style: none;
+}
+
+.local-info {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.modal-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.modal-actions button {
+  background: #006241;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-actions button:hover {
+  background: #004d32;
+}
+
+/* FOOTER */
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.footer-column {
+  flex: 1 1 180px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 6px;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  color: #666;
+  font-size: 13px;
+}
+
+.social-icons img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .contenedor {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .logo-header {
+    height: 40px;
+  }
+
+  .nav-links a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.libro-reclamaciones{
+  margin-left: center;
+}
+
+.img-reclamo {
+  height: 80px;
+  margin-top: 5px;
+}

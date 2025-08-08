@@ -1,0 +1,243 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.personalizar-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-title {
+  text-align: center;
+  color: #006241;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+select, input[type="number"] {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cantidad-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.cantidad-control button {
+  background: #006241;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cantidad-control input {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.btn-principal {
+  background: #00704A;
+  color: white;
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-principal:hover {
+  background: #005f3c;
+}
+
+.btn-principal:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+.combo-container {
+  position: relative;
+  width: 100%;
+}
+
+#adicionales-input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: white;
+}
+
+.combo-options {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: none;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.combo-options div {
+  padding: 0.6rem;
+  cursor: pointer;
+}
+
+.combo-options div:hover {
+  background: #f0f0f0;
+}
+
+.selected-tags {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  background: #006241;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tag span {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* FOOTER */
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.footer-column {
+  flex: 1 1 180px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 6px;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  color: #666;
+  font-size: 13px;
+}
+
+.social-icons img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .contenedor {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .logo-header {
+    height: 40px;
+  }
+
+  .nav-links a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.libro-reclamaciones{
+  margin-left: center;
+}
+
+.img-reclamo {
+  height: 80px;
+  margin-top: 5px;
+}
+

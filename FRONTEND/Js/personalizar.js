@@ -1,108 +1,256 @@
-document.addEventListener('DOMContentLoaded', async () => {
+// ../js/personalizar.js
+document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
-  const cafeId = parseInt(params.get('cafeId'));
-  const token = localStorage.getItem('token');
+  const cafeId = parseInt(params.get("cafeId")) || null;
+  const token = localStorage.getItem("token");
 
-  if (!token) {
-    alert("Debes iniciar sesión.");
-    window.location.href = "login.html";
-    return;
-  }
-
+  // Guarda los datos de personalizaciones traídos del backend
   let personalizacionesGlobal = {};
 
+  // Referencias DOM
+  const selectLeche = document.getElementById("tipo-leche");
+  const selectTemp = document.getElementById("temperatura");
+  const selectCrema = document.getElementById("crema-batida");
+  const cantidadInput = document.getElementById("cantidad");
+
+  const inputCombo = document.getElementById("adicionales-input");
+  const optionsContainer = document.getElementById("combo-options");
+  const tagsContainer = document.getElementById("selected-tags");
+
+  // Lista de adicionales seleccionados (strings)
+  let seleccionados = [];
+
+  // Función para rellenar selects con valores estáticos (fallback)
+  function rellenarDefaults() {
+    if (selectLeche) {
+      // dejar placeholder y añadir valores
+      const opciones = ["Leche entera","Leche descremada","Leche de soya","Leche de almendra","Leche de avena","Sin leche"];
+      opciones.forEach(v => {
+        const opt = document.createElement("option"); opt.value = v; opt.textContent = v;
+        selectLeche.appendChild(opt);
+      });
+    }
+    if (selectTemp) {
+      const opciones = ["Caliente","Tibio","Iced"];
+      opciones.forEach(v => {
+        const opt = document.createElement("option"); opt.value = v; opt.textContent = v;
+        selectTemp.appendChild(opt);
+      });
+    }
+    if (optionsContainer) {
+      const extras = ["Canela","Chispas de chocolate","Vainilla","Caramelo","Nuez Moscada"];
+      extras.forEach(v => {
+        const d = document.createElement("div");
+        d.setAttribute("data-value", v);
+        d.textContent = v;
+        optionsContainer.appendChild(d);
+      });
+    }
+  }
+
+  // ---- 1) CARGAR PERSONALIZACIONES DESDE BACKEND (si está disponible) ----
   try {
     const res = await fetch("http://localhost:8080/api/personalizaciones");
+    if (!res.ok) throw new Error("No se pudo obtener personalizaciones (status " + res.status + ")");
     const data = await res.json();
     personalizacionesGlobal = data;
+    console.log("personalizaciones cargadas:", data);
 
-    cargarOpciones(data, 'leche', 'tipo-leche');
-    cargarOpciones(data, 'temperatura', 'temperatura');
-    cargarOpcionesFiltrando(data, 'extra', 'crema-batida', 'Crema batida');
-    cargarOpciones(data, 'extra', 'adicionales');
-    cargarOpciones(data, 'endulzante', 'adicionales');
-    cargarOpciones(data, 'hielo', 'adicionales');
-
-  } catch (error) {
-    alert("No se pudo cargar personalizaciones.");
-    console.error(error);
-  }
-
-  document.getElementById("personalizarForm").addEventListener("submit", async e => {
-    e.preventDefault();
-
-    const cantidad = parseInt(document.getElementById("cantidad").value);
-    const leche = document.getElementById("tipo-leche").value;
-    const temperatura = document.getElementById("temperatura").value;
-    const cremaBatida = document.getElementById("crema-batida").value;
-    const adicionales = Array.from(document.getElementById("adicionales").selectedOptions).map(opt => opt.value);
-
-    const valoresSeleccionados = [leche, cremaBatida, ...adicionales];
-
-    const personalizacionesId = Object.values(personalizacionesGlobal)
-      .flat()
-      .filter(p => valoresSeleccionados.includes(p.valor))
-      .map(p => p.id);
-
-    if (!cafeId || cantidad < 1 || !temperatura) {
-      return alert("Completa todos los campos para continuar.");
-    }
-
-    const body = { cafeId, cantidad, temperatura, personalizacionesId };
-    console.log("Body del pedido:", body);
-
-    try {
-      const res = await fetch("http://localhost:8080/api/pedidos", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + token,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
+    // Poblar selects (limpia antes manteniendo placeholder)
+    function poblarSelectFromData(tipo, selectEl) {
+      if (!data[tipo] || !selectEl) return;
+      // elimina todas las opciones que no están marcadas disabled (placeholder sigue si existe)
+      selectEl.querySelectorAll("option:not([disabled])").forEach(o => o.remove());
+      data[tipo].forEach(p => {
+        const opt = document.createElement("option");
+        opt.value = p.valor;
+        opt.textContent = p.valor;
+        selectEl.appendChild(opt);
       });
+    }
 
-      if (res.ok) {
-        alert("☕ Pedido registrado con éxito");
-        window.location.href = "index.html";
-      } else {
-        alert("❌ Error al registrar el pedido");
+    poblarSelectFromData("leche", selectLeche);
+    poblarSelectFromData("temperatura", selectTemp);
+
+    // Llenar container de adicionales desde extra/endulzante/hielo (si existen)
+    if (optionsContainer) {
+      optionsContainer.innerHTML = "";
+      ["extra","endulzante","hielo"].forEach(tipo => {
+        if (!data[tipo]) return;
+        data[tipo].forEach(p => {
+          const div = document.createElement("div");
+          div.setAttribute("data-value", p.valor);
+          div.textContent = p.valor;
+          optionsContainer.appendChild(div);
+        });
+      });
+      // Si no hubo nada, el HTML previa puede tener elementos estáticos (no sobreescribimos más)
+    }
+  } catch (err) {
+    console.warn("No se pudieron cargar las personalizaciones desde el backend:", err);
+    // fallback a valores estáticos para que la UI funcione localmente
+    rellenarDefaults();
+  }
+
+  // ---- 2) COMBOBOX ADICIONALES (apertura, selección y tags) ----
+
+  // mostrar conteo en el input
+  function updateComboInput() {
+    if (!inputCombo) return;
+    if (seleccionados.length === 0) {
+      inputCombo.value = "";
+      inputCombo.placeholder = "Selecciona adicionales...";
+    } else {
+      inputCombo.value = seleccionados.join(", ");
+    }
+  }
+
+  // renderizar tags (FÍJATE: usamos BACKTICKS correctamente)
+  function renderTags() {
+    if (!tagsContainer) return;
+    tagsContainer.innerHTML = "";
+    seleccionados.forEach(item => {
+      const tag = document.createElement("div");
+      tag.className = "tag";
+      // estructura: texto + botón para quitar
+      tag.innerHTML = `<span class="tag-text">${item}</span><button type="button" class="tag-remove" data-value="${item}" aria-label="Eliminar ${item}">×</button>`;
+      tagsContainer.appendChild(tag);
+    });
+    updateComboInput();
+  }
+
+  // toggle dropdown
+  if (inputCombo) {
+    inputCombo.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!optionsContainer) return;
+      optionsContainer.style.display = optionsContainer.style.display === "block" ? "none" : "block";
+    });
+  }
+
+  // delegación: clic en una opción
+  if (optionsContainer) {
+    optionsContainer.addEventListener("click", (e) => {
+      const optionDiv = e.target.closest("[data-value]");
+      if (!optionDiv) return;
+      const value = optionDiv.getAttribute("data-value");
+      if (!seleccionados.includes(value) && seleccionados.length < 5) {
+        seleccionados.push(value);
+        renderTags();
       }
-    } catch (err) {
-      alert("⚠️ Error al conectar con el servidor");
-      console.error(err);
+      // ocultar menú (como UX)
+      optionsContainer.style.display = "none";
+    });
+  }
+
+  // delegación: quitar tag
+  if (tagsContainer) {
+    tagsContainer.addEventListener("click", (e) => {
+      const rem = e.target.closest(".tag-remove");
+      if (!rem) return;
+      const val = rem.getAttribute("data-value");
+      seleccionados = seleccionados.filter(x => x !== val);
+      renderTags();
+    });
+  }
+
+  // cerrar si clic fuera
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".combo-container")) {
+      if (optionsContainer) optionsContainer.style.display = "none";
     }
   });
-});
 
-function modificarCantidad(cambio) {
-  const input = document.getElementById('cantidad');
-  let valor = parseInt(input.value);
-  valor = isNaN(valor) ? 1 : valor + cambio;
-  if (valor < 1) valor = 1;
-  input.value = valor;
-}
+  // ---- 3) CONTROL DE CANTIDAD (+ / -) ----
+  const btnsCantidad = document.querySelectorAll(".cantidad-control button");
+  const btnMinus = btnsCantidad && btnsCantidad[0];
+  const btnPlus = btnsCantidad && btnsCantidad[1];
 
-function cargarOpciones(data, tipo, selectId) {
-  const select = document.getElementById(selectId);
-  if (!select || !data[tipo]) return;
+  // función global para que onclick inline funcione: window.modificarCantidad(...)
+  window.modificarCantidad = function (cambio) {
+    const input = document.getElementById("cantidad");
+    let valor = parseInt(input.value) || 1;
+    valor = valor + cambio;
+    if (valor < 1) valor = 1;
+    input.value = valor;
+    updateCantidadButtons();
+  };
 
-  data[tipo].forEach(p => {
-    const option = document.createElement("option");
-    option.value = p.valor;
-    option.textContent = p.valor;
-    select.appendChild(option);
-  });
-}
+  // listeners también (por si no quieres inline)
+  if (btnMinus) btnMinus.addEventListener("click", () => window.modificarCantidad(-1));
+  if (btnPlus) btnPlus.addEventListener("click", () => window.modificarCantidad(1));
 
-function cargarOpcionesFiltrando(data, tipo, selectId, valorBuscado) {
-  const select = document.getElementById(selectId);
-  if (!select || !data[tipo]) return;
-
-  const item = data[tipo].find(p => p.valor === valorBuscado);
-  if (item) {
-    const option = document.createElement("option");
-    option.value = item.valor;
-    option.textContent = item.valor;
-    select.appendChild(option);
+  function updateCantidadButtons() {
+    const v = parseInt(cantidadInput.value) || 1;
+    if (btnMinus) btnMinus.disabled = v <= 1;
   }
-}
+
+  // inicializar estado botones
+  updateCantidadButtons();
+
+  // si el usuario escribe manualmente
+  if (cantidadInput) cantidadInput.addEventListener("input", updateCantidadButtons);
+
+  // ---- 4) SUBMIT: crear objeto pedido, mapear personalizaciones a IDs, guardar carrito y redirigir ----
+  const form = document.getElementById("personalizarForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // validar selects mínimos
+      const leche = (selectLeche && selectLeche.value) || "";
+      const temperatura = (selectTemp && selectTemp.value) || "";
+      const cremaUi = (selectCrema && selectCrema.value) || ""; // 'si' | 'no'
+      const cantidad = parseInt(cantidadInput.value) || 1;
+
+      if (!leche || !temperatura) {
+        return alert("Por favor, selecciona tipo de leche y temperatura.");
+      }
+
+      // preparar lista final de adicionales (incluimos crema si eligió 'si')
+      const adicionalesDisplay = [...seleccionados]; // strings
+      if (cremaUi.toLowerCase() === "si" || cremaUi.toLowerCase() === "sí") {
+        // usamos exactamente el valor que tienes en la BD: "Crema batida"
+        adicionalesDisplay.push("Crema batida");
+      }
+
+      // calcular personalizacionesId (si tenemos personalizacionesGlobal)
+      // personalizacionesGlobal espera estructura { leche: [...], temperatura: [...], extra: [...], ... }
+      let personalizacionesId = [];
+      try {
+        const all = Object.values(personalizacionesGlobal).flat();
+        const valoresABuscar = [leche, ...adicionalesDisplay];
+        personalizacionesId = all
+          .filter(p => valoresABuscar.includes(p.valor))
+          .map(p => p.id);
+      } catch (err) {
+        personalizacionesId = []; // si algo falla, dejamos vacío
+      }
+
+      // Crear objetos para display y para backend
+      const pedidoDisplay = {
+        cafeId: cafeId,
+        cantidad,
+        leche,
+        temperatura,
+        cremaBatida: (cremaUi.toLowerCase() === "si" || cremaUi.toLowerCase() === "sí") ? "Sí" : "No",
+        adicionales: adicionalesDisplay
+      };
+
+      const pedidoBackend = {
+        cafeId,
+        cantidad,
+        temperatura,
+        personalizacionesId
+      };
+
+      // Guardamos en localStorage en array 'carrito' (para múltiples items)
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      carrito.push({ display: pedidoDisplay, backend: pedidoBackend });
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+
+      // Redirigir a carrito
+      window.location.href = "carrito.html";
+    });
+  }
+}); // end DOMContentLoaded
