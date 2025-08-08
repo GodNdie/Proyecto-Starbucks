@@ -127,13 +127,89 @@ body {
 
 /* Footer */
 .footer-container {
-  background-color: #006241;
-  color: white;
-  text-align: center;
-  padding: 1rem 0;
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.footer-column {
+  flex: 1 1 180px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 6px;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-bottom p {
-  margin: 0;
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 13px;
+}
+.social-icons img {
+  width: 30px;
+  margin-right: 10px;
+}
+@media screen and (max-width: 480px) {
+  .contenedor {
+    padding: 30px 20px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .logo-header {
+    height: 40px;
+  }
+
+  .nav-links a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.libro-reclamaciones{
+  margin-left: center;
+}
+
+.img-reclamo {
+  height: 80px;
+  margin-top: 5px;
 }

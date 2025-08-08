@@ -1,0 +1,200 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+
+
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-start flex-wrap">
+    <h1 class="fw-bold">Libro de Reclamaciones</h1>
+    <p id="fechaActual" class="text-muted"></p>
+  </div>
+
+  <div class="row align-items-center mt-4">
+    <div class="col-md-9">
+      <p class="mb-1 fw-bold">LASINO S.A. – Operadora de Franquicia</p>
+      <p class="mb-1 fw-bold">RUC: 20388829452</p>
+      <p class="mb-2 fw-bold">Av. Garcilaso de la Vega 1337 – Cercado de Lima – Lima</p>
+      <p>
+        Conforme a lo establecido en el Código de la Protección y Defensa del Consumidor, contamos con un Libro de Reclamaciones a tu disposición para que puedas registrar tu queja o reclamo acerca de algún pedido o transacción realizada a través de nuestras páginas.
+      </p>
+    </div>
+    <div class="col-md-3 text-md-end text-center mt-3 mt-md-0">
+      <img src="./logo-starbucks.webp" alt="Logo Starbucks" width="120">
+    </div>
+  </div>
+</section>
+
+  <!-- 🔹 BLOQUE 1: Identificación del consumidor -->
+  <div class="border p-4 mb-5 rounded shadow-sm">
+    <h4 class="bg-success text-white p-2">1. Identificación del consumidor reclamante</h4>
+
+    <form id="formReclamo">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Fecha del incidente *</label>
+          <input type="date" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label>Nombre *</label>
+          <input type="text" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Apellido *</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label>Correo *</label>
+          <input type="email" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Teléfono</label>
+          <input type="tel" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label>Tipo de documento</label>
+          <select class="form-select">
+            <option>DNI</option>
+            <option>CE</option>
+            <option>Pasaporte</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Número de documento *</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label>Menor de edad</label><br />
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="menor" value="si">
+            <label class="form-check-label">Sí</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" name="menor" value="no" checked>
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Departamento *</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label>Provincia *</label>
+          <input type="text" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label>Distrito *</label>
+          <input type="text" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label>Dirección *</label>
+          <input type="text" class="form-control" required>
+        </div>
+      </div>
+
+  </div>
+
+  <!-- 🔸 BLOQUE 2: Bien contratado -->
+  <div class="border p-4 mb-5 rounded shadow-sm">
+    <h4 class="bg-success text-white p-2">2. Identificación del bien contratado</h4>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>Tipo de bien contratado</label><br />
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="bien" value="producto">
+          <label class="form-check-label">Producto</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="bien" value="servicio">
+          <label class="form-check-label">Servicio</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>Monto reclamado</label>
+        <input type="number" class="form-control" step="0.01">
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔻 BLOQUE 3: Detalle del reclamo -->
+  <div class="border p-4 mb-5 rounded shadow-sm">
+    <h4 class="bg-success text-white p-2">3. Detalle del reclamo y pedido del consumidor</h4>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>Tipo de reclamo</label><br />
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="tipo" value="reclamo">
+          <label class="form-check-label">Reclamo</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" name="tipo" value="queja">
+          <label class="form-check-label">Queja</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label>Número del pedido</label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label>Asunto *</label>
+        <input type="text" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label>Fecha del pedido</label>
+        <input type="date" class="form-control">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Pedido del consumidor *</label>
+      <textarea class="form-control" rows="4" required></textarea>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-success px-5">Enviar</button>
+    </div>
+  </div>
+
+ 
+
+  </form>
+  <div class="container text-center mt-5 mb-4">
+  <p class="small text-muted" style="max-width: 900px; margin: 0 auto;">
+    (*) IMPORTANTE: En caso que el consumidor no consigne como mínimo su nombre, DNI, domicilio o correo electrónico, fecha del reclamo o queja y el detalle de los mismos, éstos se considerarán como no presentados (Art. 5 D.S. 006-2014-PCM).
+    <br><br>
+    El proveedor deberá dar respuesta al reclamo o queja en un plazo no mayor de quince (15) días hábiles, el cual es improrrogable. La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante el INDECOPI.
+    <br><br>
+    Se le informa que sus datos serán almacenados en el banco de "Quejas y Reclamos" con Registro N° 14089 de titularidad LASINO S.A. por un plazo indeterminado, a fin de dar respuesta a sus quejas y reclamos, así como llevar un registro de los mismos con el propósito de cumplir con las normas de protección al consumidor.
+    <br><br>
+    Las demás condiciones de tratamiento de sus datos personales, los terceros destinatarios a sus datos personales, así como el mecanismo para ejercer sus derechos ARCO se encuentran detallados en el siguiente enlace:
+    <a href="#" class="text-decoration-underline">Políticas de privacidad</a>.
+  </p>
+</div>
+
+
+</section>
+<script>
+  const fecha = new Date();
+  document.getElementById("fechaActual").innerText =
+    "Fecha: " + fecha.toLocaleDateString('es-PE') + " " + fecha.toLocaleTimeString('es-PE');
+</script>
