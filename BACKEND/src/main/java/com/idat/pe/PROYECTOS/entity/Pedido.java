@@ -29,6 +29,9 @@ public class Pedido {
     @JoinColumn(name = "metodo_pago_id")
     private MetodoPago metodoPago;
 
+    @Column(nullable = false)
+    private Integer cantidad;
+
     private String temperatura;
     private String estado = "pendiente";
     private LocalDateTime fechaPedido = LocalDateTime.now();

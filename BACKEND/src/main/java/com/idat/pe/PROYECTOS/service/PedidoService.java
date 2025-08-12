@@ -42,58 +42,79 @@ public class PedidoService {
     @Autowired
     private PedidoPersonalizacionRepository pedidoPersonalizacionRepository;
 
+    @Transactional
     public void registrarPedido(PedidoRequest request, String correoUsuario) {
+        // Usuario
         Usuario usuario = usuarioRepository.findByCorreo(correoUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+        // Café (obligatorio)
+        if (request.getCafeId() == null) throw new RuntimeException("cafeId requerido");
         Cafe cafe = cafeRepository.findById(request.getCafeId())
                 .orElseThrow(() -> new RuntimeException("Café no encontrado"));
 
-        MetodoPago metodoPago = metodoPagoRepository.findById(request.getMetodoPagoId())
-                .orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
+        // Cantidad (default 1 si no llega o llega <= 0)
+        int cantidad = (request.getCantidad() != null && request.getCantidad() > 0)
+                ? request.getCantidad() : 1;
 
-        Local local = localRepository.findById(request.getLocalId())
-                .orElseThrow(() -> new RuntimeException("Local no encontrado"));
+        double totalUnitario = cafe.getPrecio();
 
-        double total = cafe.getPrecio();
-
+        // Pedido base
         Pedido pedido = new Pedido();
         pedido.setUsuario(usuario);
         pedido.setCafe(cafe);
-        pedido.setMetodoPago(metodoPago);
-        pedido.setLocal(local);
         pedido.setTemperatura(request.getTemperatura());
-        pedido.setTotal(0); // se calculará después
+        pedido.setCantidad(cantidad);
+
+        // Método de pago (opcional)
+        if (request.getMetodoPagoId() != null) {
+            MetodoPago mp = metodoPagoRepository.findById(request.getMetodoPagoId())
+                    .orElseThrow(() -> new RuntimeException("Método de pago no encontrado"));
+            pedido.setMetodoPago(mp);
+        }
+
+        // Local (opcional)
+        if (request.getLocalId() != null) {
+            Local local = localRepository.findById(request.getLocalId())
+                    .orElseThrow(() -> new RuntimeException("Local no encontrado"));
+            pedido.setLocal(local);
+        }
+
+        // Guardar para obtener ID
+        pedido.setTotal(0);
         pedido = pedidoRepository.save(pedido);
 
-        // INGREDIENTES ADICIONALES
-        if (request.getIngredientesIds() != null) {
-            List<Ingrediente> ingredientes = ingredienteRepository.findAllById(request.getIngredientesIds());
-            for (Ingrediente ingrediente : ingredientes) {
-                PedidoIngrediente pi = new PedidoIngrediente();
-                pi.setPedido(pedido);
-                pi.setIngrediente(ingrediente);
-                pedidoIngredienteRepository.save(pi);
-                total += ingrediente.getPrecioAdicional();
-            }
+        // Ingredientes (null-safe)
+        List<Long> ingIds = (request.getIngredientesIds() != null) ? request.getIngredientesIds() : List.of();
+        for (Long idIng : ingIds) {
+            if (idIng == null) continue;
+            Ingrediente ing = ingredienteRepository.findById(idIng)
+                    .orElseThrow(() -> new RuntimeException("Ingrediente no encontrado: " + idIng));
+            PedidoIngrediente pi = new PedidoIngrediente();
+            pi.setPedido(pedido);
+            pi.setIngrediente(ing);
+            pedidoIngredienteRepository.save(pi);
+            totalUnitario += ing.getPrecioAdicional();
         }
 
-        // PERSONALIZACIONES
-        if (request.getPersonalizacionesIds() != null) {
-            List<Personalizacion> personalizaciones = personalizacionRepository.findAllById(request.getPersonalizacionesIds());
-            for (Personalizacion p : personalizaciones) {
-                PedidoPersonalizacion pp = new PedidoPersonalizacion();
-                pp.setPedido(pedido);
-                pp.setPersonalizacion(p);
-                pedidoPersonalizacionRepository.save(pp);
-                total += p.getPrecioAdicional();
-            }
+        // Personalizaciones (null-safe)
+        List<Long> perIds = (request.getPersonalizacionesIds() != null) ? request.getPersonalizacionesIds() : List.of();
+        for (Long idPer : perIds) {
+            if (idPer == null) continue;
+            Personalizacion p = personalizacionRepository.findById(idPer)
+                    .orElseThrow(() -> new RuntimeException("Personalización no encontrada: " + idPer));
+            PedidoPersonalizacion pp = new PedidoPersonalizacion();
+            pp.setPedido(pedido);
+            pp.setPersonalizacion(p);
+            pedidoPersonalizacionRepository.save(pp);
+            totalUnitario += p.getPrecioAdicional();
         }
 
-        // Actualizar el total en el pedido
-        pedido.setTotal(total);
+        // Total final = (precio base + extras) * cantidad
+        pedido.setTotal(totalUnitario * cantidad);
         pedidoRepository.save(pedido);
     }
+
     public List<PedidoResumenResponse> obtenerHistorial(String correo) {
         Usuario usuario = usuarioRepository.findByCorreo(correo)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -110,23 +131,18 @@ public class PedidoService {
             resumen.setTotal(pedido.getTotal());
 
             List<String> ingredientes = pedidoIngredienteRepository.findByPedido(pedido)
-                    .stream()
-                    .map(pi -> pi.getIngrediente().getNombre())
-                    .toList();
+                    .stream().map(pi -> pi.getIngrediente().getNombre()).toList();
 
             List<String> personalizaciones = pedidoPersonalizacionRepository.findByPedido(pedido)
-                    .stream()
-                    .map(pp -> pp.getPersonalizacion().getTipo() + ": " + pp.getPersonalizacion().getValor())
-                    .toList();
+                    .stream().map(pp -> pp.getPersonalizacion().getTipo() + ": " + pp.getPersonalizacion().getValor()).toList();
 
             resumen.setIngredientes(ingredientes);
             resumen.setPersonalizaciones(personalizaciones);
-
             historial.add(resumen);
         }
-
         return historial;
     }
+
     @Transactional
     public void repetirPedido(Long pedidoId, String correo) {
         Usuario usuario = usuarioRepository.findByCorreo(correo)
@@ -135,18 +151,17 @@ public class PedidoService {
         Pedido pedidoOriginal = pedidoRepository.findById(pedidoId)
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
 
-        // Verifica que el pedido pertenece al usuario
         if (!pedidoOriginal.getUsuario().getId().equals(usuario.getId())) {
             throw new RuntimeException("No puedes repetir un pedido que no es tuyo");
         }
 
-        // Crear nuevo pedido
         Pedido nuevoPedido = new Pedido();
         nuevoPedido.setUsuario(usuario);
         nuevoPedido.setCafe(pedidoOriginal.getCafe());
         nuevoPedido.setLocal(pedidoOriginal.getLocal());
         nuevoPedido.setMetodoPago(pedidoOriginal.getMetodoPago());
         nuevoPedido.setTemperatura(pedidoOriginal.getTemperatura());
+        nuevoPedido.setCantidad(pedidoOriginal.getCantidad()); // mantiene cantidad
         nuevoPedido.setFechaPedido(LocalDateTime.now());
         nuevoPedido.setEstado("pendiente");
         nuevoPedido.setTotal(pedidoOriginal.getTotal());
@@ -171,5 +186,4 @@ public class PedidoService {
             pedidoPersonalizacionRepository.save(nuevo);
         }
     }
-
 }

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PedidoPersonalizacionRepository extends JpaRepository<PedidoPersonalizacion, Void> {
+public interface PedidoPersonalizacionRepository extends JpaRepository<PedidoPersonalizacion, Long> {
     List<PedidoPersonalizacion> findByPedido(Pedido pedido);
 }

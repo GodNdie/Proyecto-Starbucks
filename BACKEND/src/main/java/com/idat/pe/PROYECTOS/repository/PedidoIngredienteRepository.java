@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PedidoIngredienteRepository extends JpaRepository<PedidoIngrediente, Void> {
+public interface PedidoIngredienteRepository extends JpaRepository<PedidoIngrediente, Long> {
     List<PedidoIngrediente> findByPedido(Pedido pedido);
 }
