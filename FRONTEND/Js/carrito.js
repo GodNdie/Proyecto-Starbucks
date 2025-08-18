@@ -215,10 +215,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const btnSeguir = document.getElementById("seguir-comprando");
-  if (btnSeguir) btnSeguir.addEventListener("click", () => (window.location.href = "index.html"));
+  if (btnSeguir) btnSeguir.addEventListener("click", () => (window.location.href = "menu.html"));
 
   const btnVer = document.getElementById("ver-pedidos");
-  if (btnVer) btnVer.addEventListener("click", () => (window.location.href = "historial.html"));
+  if (btnVer) btnVer.addEventListener("click", () => (window.location.href = "perfil.html"));
 
   window.addEventListener("click", (e) => {
     const modal = document.getElementById("modal-confirmacion");

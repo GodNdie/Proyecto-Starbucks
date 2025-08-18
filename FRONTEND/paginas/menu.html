@@ -8,20 +8,18 @@
 </head>
 <body>
 
-  <!-- Header -->
+  
   <header class="header">
-    <img src="../img/logo-header.png" alt="Fondo Starbucks" class="logo-fondo" />
-    <div class="header-content">
-      <nav class="nav-links">
-        <a href="#">Menú</a>
-        <a href="#">Rewards</a>
-        <a href="#">Tiendas</a>
-        <a href="#">Mi Perfil</a>
-        <button class="cerrar-link" onclick="cerrarSesion()">Cerrar Sesión</button>
+    <div class="header-left">
+      <img src="../img/logo-header.png" alt="Logo Starbucks" class="logo-header">
+      <nav class="header-center">
+        <a href="./menu.html">Menú</a>
+        <a href="./perfil.html">Mi Perfil</a>
       </nav>
-      <div class="authArea" id="authArea">
-        <!-- JS rellena sesión -->
-      </div>
+    </div>
+
+    <div class="header-right">
+      <button type="button" class="btn-filled" onclick="cerrarSesion()">Cerrar Sesión</button>
     </div>
   </header>
 
