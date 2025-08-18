@@ -62,6 +62,11 @@ function seleccionarFavorita() {
   const nuevaFavorita = prompt("¿Cuál es tu bebida favorita?");
   if (nuevaFavorita) {
     document.getElementById('bebidaFavorita').textContent = `Tu favorita es: ${nuevaFavorita}`;
-    // Puedes guardar en localStorage o enviar al backend si lo deseas
+    
   }
+}
+
+function cerrarSesion() {
+  localStorage.removeItem('token');
+  window.location.href = 'login.html';
 }

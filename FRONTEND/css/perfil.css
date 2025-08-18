@@ -11,31 +11,52 @@ body {
   color: #333;
 }
 
-/* Encabezado con fondo de logo */
+
 .header {
-  position: relative;
-  height: 220px;
-  background: url('../img/logo-header.png') no-repeat center center;
-  background-size: contain;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.overlay-logo {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 98, 65, 0.85);
-}
-
-.header-content {
-  position: relative;
-  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  padding: 1rem 0;
+  background-color: #fff;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #ccc;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;               
+}
+
+.logo-header {
+  height: 80px;
+  display: block;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;               
+}
+
+
+.header-center a,
+.header-right a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;             /
+}
+
+
+.header-center a:hover {
+  text-decoration: underline;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .nav-links {
