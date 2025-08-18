@@ -219,9 +219,15 @@ h1 {
   font-size: 13px;
 }
 
-.social-icons img {
-  width: 30px;
-  margin-right: 10px;
+.social-icons a img {
+  width: 35px;
+  margin: 0 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.social-icons a img:hover {
+  transform: scale(1.1);
 }
 
 
