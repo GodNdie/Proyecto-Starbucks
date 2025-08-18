@@ -39,13 +39,12 @@ body {
   gap: 20px;               
 }
 
-
-.header-center a,
-.header-right a {
+.header-center a {
   font-weight: bold;
   text-decoration: none;
-  color: #000;             /
+  color: #000;
 }
+
 
 
 .header-center a:hover {
@@ -59,24 +58,38 @@ body {
   gap: 15px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
+
+
+
+
+.btn-outline:hover {
+  background-color: #f0f0f0;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
+
+.btn-filled {
+  display: inline-block;
+  background-color: #000;
+  color: #fff !important;   
+  padding: 8px 14px;
+  border-radius: 25px;
   font-weight: bold;
-  font-size: 1.1rem;
+  border: none;             
+  cursor: pointer;
+  transition: background-color .2s ease;
 }
 
-.btn-outline {
-  color: white;
-  border: 1px solid white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
+
+.btn-filled:hover {
+  background-color: #333;
+}
+
+
+@media (max-width: 480px) {
+  .logo-header { height: 40px; }
+  .header-left { gap: 16px; }
+  .header-center { gap: 12px; }
+  .header-center a { font-size: 14px; }
 }
 
 /* Contenido principal */
@@ -147,6 +160,7 @@ body {
 }
 
 /* Footer */
+/* FOOTER */
 .footer-container {
   background-color: #f7f7f7;
   padding: 40px 20px;
@@ -203,10 +217,13 @@ body {
   color: #666;
   font-size: 13px;
 }
+
 .social-icons img {
   width: 30px;
   margin-right: 10px;
 }
+
+
 @media screen and (max-width: 480px) {
   .contenedor {
     padding: 30px 20px;
