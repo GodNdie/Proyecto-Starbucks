@@ -1,0 +1,250 @@
+/* 🎨 Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 📌 Encabezado */
+h2 {
+  color: #006241; /* Verde Starbucks */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* 📅 Inputs y etiquetas */
+label {
+  margin: 10px 5px;
+  font-weight: bold;
+  color: #000;
+}
+
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-right: 10px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="date"]:focus {
+  border-color: #006241;
+  box-shadow: 0 0 5px rgba(0, 98, 65, 0.6);
+}
+
+/* 🔘 Botón */
+button {
+  padding: 10px 15px;
+  background: #006241; /* Verde Starbucks */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #004d33; /* Verde más oscuro */
+}
+
+/* 📩 Mensaje */
+#mensaje {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #e74c3c;
+  text-align: center;
+}
+
+/* 📋 Lista de pedidos */
+#listaPedidos {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+#listaPedidos li {
+  background: white;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#listaPedidos li:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+/*FOOTER*/
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(180px,1fr));
+  column-gap: 48px;
+  row-gap: 24px;
+  margin-bottom:30px;
+}
+
+
+.f-title{ margin:0 0 10px; font-size:16px; font-weight:700; color:#0a5c43; }
+.f-list{ list-style:none; margin:0; padding:0; }
+.f-list li{ margin: 6px 0; }
+
+.footer-inner{ max-width:1200px; margin:0 auto; padding:40px 20px; }
+
+.footer-menu a {
+  color: #333;              
+  text-decoration: none;    
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-menu a:hover,
+.footer-menu a:focus {
+  color: #000;              
+  text-decoration: underline;
+  outline: none;
+}
+
+.footer-menu a:visited {
+  color: #333;             
+}
+
+
+.footer-bottom{
+  border-top:1px solid #d9d9d9;
+  padding:15px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+
+.footer-left{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+}
+
+.footer-left svg{ 
+  width:28px; 
+  height:28px; 
+  fill:#111; 
+  transition:transform .2s; 
+}
+
+.footer-left a:hover svg{ 
+  transform: scale(1.08); 
+}
+
+.footer-copy{ 
+  margin:0; 
+  color:#666; 
+  font-size:13px; 
+  text-align:center; 
+  flex:1; 
+}
+
+.footer-right{ 
+  margin-left:auto; 
+}
+/* ====== FOOTER ====== */
+.footer-container {
+  background: #f7f7f7;
+  padding: 40px 20px;
+  border-top: 1px solid #ddd;
+  font-family: Arial, sans-serif;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Menú de columnas */
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  gap: 30px;
+}
+
+/* Columna individual */
+.f-col {
+  flex: 1;
+  min-width: 160px;
+}
+
+.f-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #006241; /* Verde Starbucks */
+  margin-bottom: 12px;
+}
+
+.f-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.f-list li {
+  margin-bottom: 8px;
+}
+
+.f-list a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.f-list a:hover {
+  color: #006241; /* Hover verde Starbucks */
+}
+
+/* ====== FOOTER BOTTOM ====== */
+.footer-bottom {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-left svg {
+  fill: #006241;
+  margin-right: 15px;
+  transition: fill 0.3s ease;
+}
+
+.footer-left svg:hover {
+  fill: #004d33;
+}
+
+.footer-copy {
+  font-size: 14px;
+  color: #555;
+  flex: 1;
+  text-align: center;
+}
+
+.footer-right img {
+  max-width: 120px;
+  height: auto;
+}

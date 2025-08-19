@@ -1,0 +1,147 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+.contenedor {
+  width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #006241; /* Verde Starbucks */
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #000000;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #006241; /* Verde Starbucks */
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #004d33; /* Verde más oscuro */
+}
+
+.mensaje {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #006241;
+}
+
+.perfil-actualizado {
+  margin-top: 25px;
+  padding: 15px;
+  border: 1px solid #006241;
+  border-radius: 8px;
+  background-color: #f1fdf6;
+}
+
+/*FOOTER*/
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(180px,1fr));
+  column-gap: 48px;
+  row-gap: 24px;
+  margin-bottom:30px;
+}
+
+
+.f-title{ margin:0 0 10px; font-size:16px; font-weight:700; color:#0a5c43; }
+.f-list{ list-style:none; margin:0; padding:0; }
+.f-list li{ margin: 6px 0; }
+
+.footer-inner{ max-width:1200px; margin:0 auto; padding:40px 20px; }
+
+.footer-menu a {
+  color: #333;              
+  text-decoration: none;    
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-menu a:hover,
+.footer-menu a:focus {
+  color: #000;              
+  text-decoration: underline;
+  outline: none;
+}
+
+.footer-menu a:visited {
+  color: #333;             
+}
+
+
+.footer-bottom{
+  border-top:1px solid #d9d9d9;
+  padding:15px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+
+.footer-left{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+}
+
+.footer-left svg{ 
+  width:28px; 
+  height:28px; 
+  fill:#111; 
+  transition:transform .2s; 
+}
+
+.footer-left a:hover svg{ 
+  transform: scale(1.08); 
+}
+
+.footer-copy{ 
+  margin:0; 
+  color:#666; 
+  font-size:13px; 
+  text-align:center; 
+  flex:1; 
+}
+
+.footer-right{ 
+  margin-left:auto; 
+}
+
