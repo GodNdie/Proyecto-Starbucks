@@ -5,26 +5,40 @@ body {
 }
 
 .header {
-  background-color: #006241;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  color: white;
+  background-color: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.header img.logo-header {
-  height: 40px;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
-.nav-links a {
-  color: white;
+.logo-header {
+  height: 80px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-center a {
+  font-weight: bold;
   text-decoration: none;
-  margin: 0 10px;
+  color: #000;
 }
 
-.nav-links a:hover {
-  text-decoration: underline;
+
+
+.btn-filled:hover {
+  background-color: #333;
 }
 
 .main-wrapper {

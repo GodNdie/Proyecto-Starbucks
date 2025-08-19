@@ -1,8 +1,8 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f8f8f8;
+    background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     color: #333;
   }
 
@@ -40,12 +40,14 @@ body {
 
     
   .discount-container {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 60px auto;
+    margin: 40px auto;
     background: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e6e6e6;
+    animation: fadeInUp 0.5s ease;
   }
   
   h1, h2 {
@@ -79,6 +81,7 @@ body {
   
   .btn-apply:hover {
     background-color: #004d34;
+    transform: translateY(-2px);
   }
   
   .discounted-products {
@@ -152,6 +155,7 @@ body {
   background-color: #f7f7f7;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
+  margin-top: 60px;
 }
 
 .footer-menu{
