@@ -2,43 +2,67 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Starbucks Perú - Iniciar Sesión</title>
-  <link rel="stylesheet" href="../css/login.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Locales - Starbucks</title>
+  <link rel="stylesheet" href="../css/locales.css">
 </head>
 <body>
-
-  <!-- Header -->
+  
   <header class="header">
     <div class="header-left">
       <img src="../img/logo-header.png" alt="Logo Starbucks" class="logo-header">
       <nav class="header-center">
         <a href="./menu.html">Menú</a>
         <a href="./perfil.html">Mi Perfil</a>
-        <a href="./locales.html">Locales</a>
       </nav>
     </div>
 
-    <div class="header-right">
-      <a href="login.html" class="btn-outline">Iniciar Sesión</a>
-      <a href="registro.html" class="btn-filled">Regístrate</a>
-    </div>
   </header>
-
-  <!-- Contenido principal -->
-  <main class="main-wrapper">
-    <div class="contenedor">
-      <img src="../img/starbucks_login.png" alt="Starbucks Logo" class="logo">
-      <h2>Iniciar Sesión</h2>
-      <form id="loginForm" method="POST">
-        <input type="email" id="correo" placeholder="Correo electrónico" required>
-        <input type="password" id="contrasena" placeholder="Contraseña" required>
-        <button type="submit">Ingresar</button>
-      </form>
+  
+  
+  
+  
+  
+  <div class="store-container">
+    <h1> Gestión de Locales</h1>
+    
+    <!-- Filtros -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="status-filter">Estado:</label>
+        <select id="status-filter" class="form-control">
+          <option value="all">Todos</option>
+          <option value="active">Activos</option>
+          <option value="inactive">Inactivos</option>
+        </select>
+      </div>
+      <button id="refresh-btn" class="btn-refresh">🔄 Actualizar</button>
     </div>
-  </main>
 
-  <!-- Footer -->
+    <!-- Lista de locales -->
+    <table id="stores-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Datos se cargarán dinámicamente -->
+      </tbody>
+    </table>
+
+    <!-- Resumen -->
+    <div class="summary-card">
+      <p>Locales activos: <span id="active-count">0</span></p>
+      <p>Locales inactivos: <span id="inactive-count">0</span></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="footer-container" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
     <meta itemprop="name" content="Starbucks Perú">
 
@@ -112,7 +136,6 @@
   </div>
 </footer>
 
-  
-  <script src="../js/login.js"></script>
+  <script src="locales.js"></script>
 </body>
 </html>

@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Starbucks Perú - Iniciar Sesión</title>
-  <link rel="stylesheet" href="../css/login.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Descuentos - Starbucks</title>
+  <link rel="stylesheet" href="../css/descuentos.css">
 </head>
 <body>
-
-  <!-- Header -->
+  
+  <!-- HEADER -->
   <header class="header">
     <div class="header-left">
       <img src="../img/logo-header.png" alt="Logo Starbucks" class="logo-header">
@@ -18,25 +18,58 @@
         <a href="./locales.html">Locales</a>
       </nav>
     </div>
-
-    <div class="header-right">
-      <a href="login.html" class="btn-outline">Iniciar Sesión</a>
-      <a href="registro.html" class="btn-filled">Regístrate</a>
-    </div>
   </header>
-
-  <!-- Contenido principal -->
-  <main class="main-wrapper">
-    <div class="contenedor">
-      <img src="../img/starbucks_login.png" alt="Starbucks Logo" class="logo">
-      <h2>Iniciar Sesión</h2>
-      <form id="loginForm" method="POST">
-        <input type="email" id="correo" placeholder="Correo electrónico" required>
-        <input type="password" id="contrasena" placeholder="Contraseña" required>
-        <button type="submit">Ingresar</button>
-      </form>
+  
+  
+  
+  <div class="discount-container">
+    <h1>Aplicar Descuentos</h1>
+    
+    <!-- Selector de productos -->
+    <div class="form-group">
+      <label for="product-select">Producto:</label>
+      <select id="product-select" class="form-control">
+        <option value="">Seleccione un producto</option>
+        <!-- Opciones se llenarán dinámicamente -->
+      </select>
     </div>
-  </main>
+
+    <!-- Control de descuento -->
+    <div class="form-group">
+      <label for="discount-percent">Descuento (%):</label>
+      <input type="number" id="discount-percent" min="0" max="100" class="form-control" placeholder="Ej: 20">
+    </div>
+
+    <button id="apply-discount" class="btn-apply">Aplicar Descuento</button>
+
+    <!-- Lista de productos con descuento -->
+    <div class="discounted-products">
+      <h2>Productos con Descuento</h2>
+      <table id="discount-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio Original</th>
+            <th>Descuento</th>
+            <th>Precio Final</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filas se generarán dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Resumen -->
+    <div class="summary">
+      <h2> Resumen de Descuentos</h2>
+      <div class="summary-card">
+        <p>Productos con descuento: <span id="total-discounted">0</span></p>
+        <p>Descuento total aplicado: <span id="total-savings">$0.00</span></p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer-container" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
@@ -112,7 +145,6 @@
   </div>
 </footer>
 
-  
-  <script src="../js/login.js"></script>
+  <script src="descuentosd.js"></script>
 </body>
 </html>

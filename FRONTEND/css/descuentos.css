@@ -1,0 +1,245 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo-header {
+  height: 80px;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-center a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+    
+  .discount-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2 {
+    color: #006241; /* Verde Starbucks */
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn-apply {
+    background-color: #006241;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .btn-apply:hover {
+    background-color: #004d34;
+  }
+  
+  .discounted-products {
+    margin-top: 40px;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .discounted-price {
+    color: #d62300;
+    font-weight: bold;
+  }
+  
+  .summary-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .summary-card p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .discount-container {
+      padding: 15px;
+    }
+    
+    table {
+      font-size: 14px;
+    }
+  }
+
+/*FOOTER*/
+.footer-container {
+  background-color: #f7f7f7;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-menu{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(180px,1fr));
+  column-gap: 48px;
+  row-gap: 24px;
+  margin-bottom:30px;
+}
+
+
+.f-title{ margin:0 0 10px; font-size:16px; font-weight:700; color:#0a5c43; }
+.f-list{ list-style:none; margin:0; padding:0; }
+.f-list li{ margin: 6px 0; }
+
+.footer-inner{ max-width:1200px; margin:0 auto; padding:40px 20px; }
+
+.footer-menu a {
+  color: #333;              
+  text-decoration: none;    
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.footer-menu a:hover,
+.footer-menu a:focus {
+  color: #000;              
+  text-decoration: underline;
+  outline: none;
+}
+
+.footer-menu a:visited {
+  color: #333;             
+}
+
+
+.footer-bottom{
+  border-top:1px solid #d9d9d9;
+  padding:15px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+}
+
+.footer-left{ 
+  display:flex; 
+  align-items:center; 
+  gap:12px; 
+}
+
+.footer-left svg{ 
+  width:28px; 
+  height:28px; 
+  fill:#111; 
+  transition:transform .2s; 
+}
+
+.footer-left a:hover svg{ 
+  transform: scale(1.08); 
+}
+
+.footer-copy{ 
+  margin:0; 
+  color:#666; 
+  font-size:13px; 
+  text-align:center; 
+  flex:1; 
+}
+
+.footer-right{ 
+  margin-left:auto; 
+}
+
+.img-reclamo {
+  height: 80px;
+  margin-top: 5px;
+}
+
+
+@media screen and (max-width: 480px) {
+  .contenedor { padding: 30px 20px; }
+  .logo { width: 90px; }
+  .logo-header { height: 40px; }
+  .nav-links a { margin-left: 10px; font-size: 14px; }
+
+  .footer-bottom {
+    justify-content: center;     
+    gap: 12px;
+  }
+  .footer-right { margin-left: 0; }
+  .img-reclamo { height: 60px; }
+}
