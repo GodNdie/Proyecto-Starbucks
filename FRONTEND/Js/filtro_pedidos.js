@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Datos de ejemplo (en un caso real esto vendría del backend)
     const pedidos = [
-        { id: 1, fecha: "2025-08-10", detalle: "Laptop Lenovo" },
-        { id: 2, fecha: "2025-08-12", detalle: "Mouse inalámbrico" },
-        { id: 3, fecha: "2025-08-18", detalle: "Teclado mecánico" }
+        
+        { id: 1, fecha: "2025-08-18", detalle: "latte" }
     ];
 
     btnFiltrar.addEventListener("click", function () {
