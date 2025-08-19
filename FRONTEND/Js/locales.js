@@ -1,103 +1,123 @@
+// locales.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Datos de ejemplo (simularían una API)
-    let stores = [
-      { id: 1, name: "Starbucks Miraflores", address: "Av. Larco 123", active: true },
-      { id: 2, name: "Starbucks San Isidro", address: "Av. Javier Prado 456", active: true },
-      { id: 3, name: "Starbucks Centro Histórico", address: "Jr. de la Unión 789", active: false },
-      { id: 4, name: "Starbucks La Molina", address: "Av. La Molina 1011", active: true }
-    ];
-  
-    // Elementos DOM
-    const statusFilter = document.getElementById('status-filter');
-    const refreshBtn = document.getElementById('refresh-btn');
-    const storesTable = document.getElementById('stores-table').querySelector('tbody');
-    const activeCount = document.getElementById('active-count');
-    const inactiveCount = document.getElementById('inactive-count');
-  
-    // Cargar datos iniciales
+  const API_BASE = 'http://localhost:8080/api/locales';
+
+  const statusFilter = document.getElementById('status-filter');
+  const refreshBtn = document.getElementById('refresh-btn');
+  const storesTable = document.querySelector('#stores-table tbody');
+  const activeCount = document.getElementById('active-count');
+  const inactiveCount = document.getElementById('inactive-count');
+
+  // Carga inicial
+  loadStores();
+
+  // Eventos
+  statusFilter.addEventListener('change', loadStores);
+  refreshBtn.addEventListener('click', () => {
     loadStores();
-    updateCounters();
-  
-    // Event Listeners
-    statusFilter.addEventListener('change', loadStores);
-    refreshBtn.addEventListener('click', () => {
-      // Simular recarga de datos
-      loadStores();
-      showNotification("Locales actualizados correctamente");
-    });
-  
-    // Cargar locales según filtro
-    function loadStores() {
-      const status = statusFilter.value;
-      let filteredStores = [...stores];
-  
-      if (status !== 'all') {
-        filteredStores = stores.filter(store => 
-          status === 'active' ? store.active : !store.active
-        );
-      }
-  
-      renderStores(filteredStores);
-    }
-  
-    // Renderizar tabla
-    function renderStores(storesToRender) {
-      storesTable.innerHTML = '';
-  
-      storesToRender.forEach(store => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${store.id}</td>
-          <td>${store.name}</td>
-          <td>${store.address}</td>
-          <td class="${store.active ? 'status-active' : 'status-inactive'}">
-            ${store.active ? 'Activo' : 'Inactivo'}
-          </td>
-          <td>
-            <label class="toggle-switch">
-              <input type="checkbox" ${store.active ? 'checked' : ''} data-id="${store.id}">
-              <span class="slider"></span>
-            </label>
-          </td>
-        `;
-        storesTable.appendChild(row);
-      });
-  
-      // Agregar eventos a los switches
-      document.querySelectorAll('.toggle-switch input').forEach(switchEl => {
-        switchEl.addEventListener('change', (e) => {
-          const storeId = parseInt(e.target.getAttribute('data-id'));
-          toggleStoreStatus(storeId, e.target.checked);
-        });
-      });
-    }
-  
-    // Cambiar estado de local
-    function toggleStoreStatus(id, isActive) {
-      const storeIndex = stores.findIndex(store => store.id === id);
-      if (storeIndex >= 0) {
-        stores[storeIndex].active = isActive;
-        updateCounters();
-        showNotification(`Local ${stores[storeIndex].name} ${isActive ? 'activado' : 'desactivado'}`);
-      }
-    }
-  
-    // Actualizar contadores
-    function updateCounters() {
-      const activeStores = stores.filter(store => store.active).length;
-      activeCount.textContent = activeStores;
-      inactiveCount.textContent = stores.length - activeStores;
-    }
-  
-    // Mostrar notificación
-    function showNotification(message) {
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      notification.textContent = message;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.remove();
-      }, 3000);
-    }
+    showNotification('Locales actualizados correctamente');
   });
+
+  async function loadStores() {
+    try {
+      const status = statusFilter.value; // all | active | inactive
+      const params = new URLSearchParams();
+
+      if (status === 'active') params.set('activo', 'true');
+      if (status === 'inactive') params.set('activo', 'false');
+
+      const res = await fetch(`${API_BASE}${params.toString() ? `?${params.toString()}` : ''}`);
+      if (!res.ok) throw new Error('Error al cargar locales');
+
+      const locales = await res.json(); // List<LocalDto>
+      renderStores(locales);
+      updateCounters(locales);
+    } catch (err) {
+      console.error(err);
+      showNotification('No se pudieron cargar los locales', true);
+    }
+  }
+
+  function renderStores(locales) {
+    storesTable.innerHTML = '';
+
+    locales.forEach(l => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${l.id}</td>
+        <td>${l.nombre}</td>
+        <td>${l.direccion} ${l.ciudad ? `(${l.ciudad})` : ''}</td>
+        <td class="${l.activo ? 'status-active' : 'status-inactive'}">
+          ${l.activo ? 'Activo' : 'Inactivo'}
+        </td>
+        <td>
+          <label class="toggle-switch">
+            <input type="checkbox" ${l.activo ? 'checked' : ''} data-id="${l.id}">
+            <span class="slider"></span>
+          </label>
+        </td>
+      `;
+      storesTable.appendChild(row);
+    });
+
+    // Listeners de switches
+    document.querySelectorAll('.toggle-switch input').forEach(switchEl => {
+      switchEl.addEventListener('change', async (e) => {
+        const id = Number(e.target.getAttribute('data-id'));
+        const isActive = e.target.checked;
+
+        // Optimista: actualiza UI de una
+        const estadoCell = e.target.closest('tr').children[3];
+        estadoCell.textContent = isActive ? 'Activo' : 'Inactivo';
+        estadoCell.className = isActive ? 'status-active' : 'status-inactive';
+
+        try {
+          const res = await fetch(`${API_BASE}/${id}/estado`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ activo: isActive })
+          });
+          if (!res.ok) throw new Error('Error al cambiar estado');
+          showNotification(`Local #${id} ${isActive ? 'activado' : 'desactivado'}`);
+        } catch (err) {
+          // Revertir UI si falla
+          e.target.checked = !isActive;
+          const revertCell = e.target.closest('tr').children[3];
+          revertCell.textContent = !isActive ? 'Activo' : 'Inactivo';
+          revertCell.className = !isActive ? 'status-active' : 'status-inactive';
+          console.error(err);
+          showNotification('No se pudo cambiar el estado', true);
+        } finally {
+          // Recalcular contadores con una recarga liviana
+          await recalcCounters();
+        }
+      });
+    });
+  }
+
+  function updateCounters(locales) {
+    const activos = locales.filter(l => l.activo).length;
+    activeCount.textContent = activos;
+    inactiveCount.textContent = locales.length - activos;
+  }
+
+  async function recalcCounters() {
+    try {
+      // Pide todos para contar (si quieres exactitud con filtros “all”)
+      const resAll = await fetch(API_BASE);
+      if (!resAll.ok) return;
+      const all = await resAll.json();
+      const activos = all.filter(l => l.activo).length;
+      activeCount.textContent = activos;
+      inactiveCount.textContent = all.length - activos;
+    } catch { /* noop */ }
+  }
+
+  function showNotification(message, error = false) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${error ? 'error' : ''}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+  }
+});

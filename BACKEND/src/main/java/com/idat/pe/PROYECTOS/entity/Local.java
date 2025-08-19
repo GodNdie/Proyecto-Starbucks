@@ -17,4 +17,6 @@ public class Local {
     private String nombre;
     private String direccion;
     private String ciudad;
+
+    private Boolean activo = true;
 }

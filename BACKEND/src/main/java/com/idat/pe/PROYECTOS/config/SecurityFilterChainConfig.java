@@ -43,6 +43,7 @@ public class SecurityFilterChainConfig {
                         .requestMatchers("/api/ingredientes/**").permitAll()
                         .requestMatchers("/api/personalizaciones/**").permitAll()
                         .requestMatchers("/api/pedidos/**").permitAll()
+                        .requestMatchers("/api/locales/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
