@@ -290,3 +290,32 @@ body {
   .footer-right { margin-left: 0; }
   .img-reclamo { height: 60px; }
 }
+/* Ajusta las imágenes de los cafés */
+.cafe-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+}
+
+/* Botón dentro de cada tarjeta */
+.cafe-card button {
+  background-color: #006241;   /* Verde Starbucks */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cafe-card button:hover {
+  background-color: #004d34;   /* Verde más oscuro al hover */
+}
+
+/* Ajustar los destacados para que resalten */
+.menu-destacados h2 {
+  color: #cba258;   /* Dorado usado en Starbucks */
+}

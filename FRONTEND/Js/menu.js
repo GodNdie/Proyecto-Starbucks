@@ -33,6 +33,37 @@ async function cargarPerfil() {
   }
 }
 
+
+const cafes = [
+  {
+    nombre: "Latte",
+    descripcion: "Café espresso con leche vaporizada",
+    precio: "S/. 13.50",
+    imagen: "../img/latte-convertido-de-jpeg.png ",
+    categoria: "calientes"
+  
+  }
+];
+
+// Referencia al contenedor
+const contenedorCafes = document.getElementById("cafes-container");
+
+// Render dinámico
+cafes.forEach(cafe => {
+  const card = document.createElement("div");
+  card.classList.add("producto");
+
+  card.innerHTML = `
+    <img src="${cafe.imagen}" alt="${cafe.nombre}">
+    <h3>${cafe.nombre}</h3>
+    <p>${cafe.descripcion}</p>
+    <p class="precio">${cafe.precio}</p>
+    <button class="btn">Personalizar</button>
+  `;
+
+  contenedorCafes.appendChild(card);
+});
+
 async function cargarCafes() {
   try {
     const response = await fetch('http://localhost:8080/api/cafes');
