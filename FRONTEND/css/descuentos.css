@@ -7,53 +7,34 @@ body {
   }
 
 /* HEADER */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  padding: 15px 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.header{
+  display:flex; align-items:center; justify-content:space-between;
+  background:#fff; padding:16px 40px; box-shadow: var(--shadow-sm);
+  position: sticky; top:0; z-index: 10;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.logo-header {
-  height: 80px;
-}
-
-.header-center {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-center a {
-  font-weight: bold;
-  text-decoration: none;
-  color: #000;
-}
+.header-left{display:flex; align-items:center; gap:32px;}
+.logo-header{height:72px;}
+.header-center{display:flex; gap:18px;}
+.header-center a{font-weight:600; color:#111; text-decoration:none;}
+.header-center a:hover{opacity:.8}
 
     
-  .discount-container {
-    max-width: 60px auto;
-    margin: 40px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    border: 1px solid #e6e6e6;
-    animation: fadeInUp 0.5s ease;
-  }
+.discount-container{
+  max-width: 960px;
+  margin: clamp(28px, 5vw, 56px) auto; 
+  background: var(--card);
+  padding: clamp(22px, 4vw, 36px);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: fadeIn .35s ease;
+}
   
-  h1, h2 {
-    color: #006241; /* Verde Starbucks */
-    margin-bottom: 20px;
-  }
+@keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+h1{color:var(--brand); font-size: clamp(22px, 3.3vw, 30px); margin:0 0 18px}
+h2{color:var(--brand); font-size: clamp(18px, 2.7vw, 22px); margin:24px 0 12px}
   
   .form-group {
     margin-bottom: 20px;
